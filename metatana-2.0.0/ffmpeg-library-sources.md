@@ -199,3 +199,48 @@ The Linux FFmpeg build (`metatana-ffmpeg-n8.1.2-34-g9b6c8969e0-linux64-gpl-nodvd
 | 50-vaapi/40-libdrm | https://gitlab.freedesktop.org/mesa/drm.git | b97cbde15c5c3abfe44d78e8f57139e50f612fec | linux64, linuxarm64 |
 
 The Windows-only libraries (mingw-w64, mingw-std-threads) are not in the Linux builds. The Linux programs link glibc dynamically.
+
+## macOS build
+
+The macOS FFmpeg build (`metatana-ffmpeg-n8.1.2-34-g9b6c8969e0-macosarm64-gpl-nodvd.tar.xz`) was built on macOS for Apple silicon, minimum macOS 12.0, with Martin Riedl's FFmpeg build script (https://gitlab.com/martinr92/ffmpeg) at commit `8ba9125bd30d13e3b01103e2145abd0e74250032`, plus `metatana-riedl-build-script-macos.patch` and `metatana-ffmpeg-nodvd-build-macos.sh`. The script downloads each library's source release and builds it as a static library; it does not use BtbN's images, so the libraries and versions differ from the Windows and Linux builds. `metatana-ffmpeg-nodvd-macos-library-sources-riedl-8ba9125bd30d.tar.xz` holds every file it downloaded, unchanged. `SOURCES.md` inside gives each file's sha256 and size.
+
+Not included, because MetaTana's FFmpeg does not contain them: libdvdcss, libdvdread and libdvdnav (never built), rav1e (skipped), GNU libiconv (the script skips it; FFmpeg uses macOS's own), the Decklink SDK (off) and OpenAPV (`--disable-liboapv`). The programs load only macOS system libraries and frameworks.
+
+| Library | Version or commit | Downloaded from | Use |
+|---|---|---|---|
+| aom | 3.11.0 | https://storage.googleapis.com/aom-releases/libaom-3.11.0.tar.gz | linked |
+| dav1d | 1.5.1 | https://code.videolan.org/videolan/dav1d/-/archive/1.5.1/dav1d-1.5.1.tar.gz | linked |
+| fontconfig | 2.16.0 | https://www.freedesktop.org/software/fontconfig/release/fontconfig-2.16.0.tar.xz | linked |
+| freetype | 2.13.0 | https://download.savannah.gnu.org/releases/freetype/freetype-2.13.0.tar.gz | linked |
+| fribidi | 1.0.16 | https://github.com/fribidi/fribidi/releases/download/v1.0.16/fribidi-1.0.16.tar.xz | linked |
+| harfbuzz | 10.4.0 | https://github.com/harfbuzz/harfbuzz/releases/download/10.4.0/harfbuzz-10.4.0.tar.xz | linked |
+| lame | 3.100 | https://downloads.sourceforge.net/project/lame/lame/3.100/lame-3.100.tar.gz | linked |
+| libass | 0.17.3 | https://github.com/libass/libass/releases/download/0.17.3/libass-0.17.3.tar.gz | linked |
+| libbluray | 1.5.0 | https://download.videolan.org/pub/videolan/libbluray/1.5.0/libbluray-1.5.0.tar.xz | linked (includes libudfread 1.2.0 in contrib/libudfread) |
+| libklvanc | 1.6.0 | https://github.com/stoth68000/libklvanc/archive/refs/tags/vid.obe.1.6.0.tar.gz | linked |
+| libogg | 1.3.5 | https://ftp.osuosl.org/pub/xiph/releases/ogg/libogg-1.3.5.tar.gz | linked |
+| libtheora | 1.1.1 | http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2 | linked |
+| libvmaf | 3.0.0 | https://github.com/Netflix/vmaf/archive/refs/tags/v3.0.0.tar.gz | linked |
+| libvorbis | 1.3.7 | https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.7.tar.gz | linked |
+| libwebp | 1.5.0 | https://github.com/webmproject/libwebp/archive/refs/tags/v1.5.0.tar.gz | linked |
+| libxml2 | 2.14.3 | https://gitlab.gnome.org/GNOME/libxml2/-/archive/v2.14.3/libxml2-v2.14.3.tar.gz | linked |
+| openh264 | 2.6.0 | https://github.com/cisco/openh264/archive/v2.6.0.tar.gz | linked |
+| openjpeg | 2.5.3 | https://github.com/uclouvain/openjpeg/archive/refs/tags/v2.5.3.tar.gz | linked |
+| openssl | 3.5.0 | https://github.com/openssl/openssl/releases/download/openssl-3.5.0/openssl-3.5.0.tar.gz | linked (libcrypto, through libsrt) |
+| opus | 1.5.2 | https://downloads.xiph.org/releases/opus/opus-1.5.2.tar.gz | linked |
+| sdl | 2.32.4 | https://www.libsdl.org/release/SDL2-2.32.4.tar.gz | linked |
+| snappy | 1.2.2 | https://github.com/google/snappy/archive/refs/tags/1.2.2.tar.gz | linked |
+| srt | 1.5.4 | https://github.com/Haivision/srt/archive/refs/tags/v1.5.4.tar.gz | linked |
+| svt-av1 | 3.0.2 | https://gitlab.com/AOMediaCodec/SVT-AV1/-/archive/v3.0.2/SVT-AV1-v3.0.2.tar.gz | linked |
+| vpx | 1.15.1 | https://github.com/webmproject/libvpx/archive/v1.15.1.tar.gz | linked |
+| vvenc | 1.13.1 | https://github.com/fraunhoferhhi/vvenc/archive/refs/tags/v1.13.1.tar.gz | linked |
+| x264 | 0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee | https://code.videolan.org/videolan/x264/-/archive/0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee/x264-0480cb05fa188d37ae87e8f4fd8f1aea3711f7ee.tar.gz | linked |
+| x265 | 4.1 | https://bitbucket.org/multicoreware/x265_git/get/4.1.tar.gz | linked |
+| zimg | 3.0.5 | https://github.com/sekrit-twc/zimg/archive/refs/tags/release-3.0.5.tar.gz | linked |
+| zlib | 1.3.1 | https://www.zlib.net/fossils/zlib-1.3.1.tar.gz | linked |
+| zvbi | 0.2.35 | https://sourceforge.net/projects/zapping/files/zvbi/0.2.35/zvbi-0.2.35.tar.bz2/download | linked |
+| nasm | 2.16.03 | http://www.nasm.us/pub/nasm/releasebuilds/2.16.03/nasm-2.16.03.tar.gz | build tool, not linked |
+| ninja | 1.12.1 | https://github.com/ninja-build/ninja/archive/refs/tags/v1.12.1.tar.gz | build tool, not linked |
+| pkg-config | 0.29.2 | https://pkg-config.freedesktop.org/releases/pkg-config-0.29.2.tar.gz | build tool, not linked |
+
+The build also used CMake 3.31.6 (Kitware's macOS binary), meson 1.11.2 (from PyPI), and GNU autoconf 2.73, automake 1.19 and libtool 2.6.2 as build tools only. The compiler was Apple clang 21.0.0 from the Xcode Command Line Tools.
