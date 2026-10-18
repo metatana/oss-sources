@@ -169,3 +169,33 @@ The toolchains come from BtbN's base images: GCC with mingw-w64 for win64 and ll
 | 50-zimg (submodule graphengine/test/googletest) | see .gitmodules | e2239ee6043f73722e7aa812a459f54a28552929 | win64, winarm64 | 50-zimg/src1/graphengine/test/googletest |
 | 50-zimg (submodule test/extra/googletest) | see .gitmodules | 6910c9d9165801d8827d628cb72eb7ea9dd538c5 | win64, winarm64 | 50-zimg/src1/test/extra/googletest |
 | 50-zvbi | https://github.com/zapping-vbi/zvbi | d3a5ee9f2b047bf16cd1ee5ccf6ec05ee75409d0 | win64, winarm64 | 50-zvbi/src1 |
+
+## Linux build
+
+The Linux FFmpeg build (`metatana-ffmpeg-n8.1.2-34-g9b6c8969e0-linux64-gpl-nodvd.tar.xz`, `metatana-ffmpeg-n8.1.2-34-g9b6c8969e0-linuxarm64-gpl-nodvd.tar.xz`) was built in `ghcr.io/btbn/ffmpeg-builds/linux64-gpl-8.1@sha256:1a82e5045a79cd997d54f6753c432068fec38f10255e7c4a6e938f268b4ae722` and `ghcr.io/btbn/ffmpeg-builds/linuxarm64-gpl-8.1@sha256:44154241edbd83dba37e6f152de72277d34382bfe0b76863c0801a6ed9a38771` (both created 2026-10-17). BtbN's master was then at commit `63ac3265b0789ea16c7b1f8351cd2ad195a28722`, whose `scripts.d` is identical to the one at `9acad4a9ef15`. The libraries in the table above are at the same commits in the Linux images (linux64 has every win64 library; linuxarm64 has the arm64-capable ones). The libraries only the Linux images contain are in `metatana-ffmpeg-nodvd-linux-library-sources-btbn-63ac3265b078.tar.xz`:
+
+| Script | Repository | Commit | Targets |
+|---|---|---|---|
+| 10-xorg-macros | https://gitlab.freedesktop.org/xorg/util/macros.git | ea1e15a4909ac8b03b2c5a08ac3810b385985157 | linux64, linuxarm64 |
+| 45-pulseaudio | https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git | 77d25a1e613095bdf87a1d13b65e7c330565077a | linux64, linuxarm64 |
+| 45-x11/10-xcbproto | https://gitlab.freedesktop.org/xorg/proto/xcbproto.git | cf7e2581b613802f2f8ec2a4b50a6a20aad4bf52 | linux64, linuxarm64 |
+| 45-x11/10-xproto | https://gitlab.freedesktop.org/xorg/proto/xorgproto.git | fd86fbff46eb7ab8e193c12b8a529e90bae31835 | linux64, linuxarm64 |
+| 45-x11/10-xtrans | https://gitlab.freedesktop.org/xorg/lib/libxtrans.git | 79f6b0bfe2170496e8c37626043d009f4cd3f1e1 | linux64, linuxarm64 |
+| 45-x11/20-libxau | https://gitlab.freedesktop.org/xorg/lib/libxau.git | be1daeb909f1d678e7859ac1555e90b4e768d5c4 | linux64, linuxarm64 |
+| 45-x11/30-libxcb | https://gitlab.freedesktop.org/xorg/lib/libxcb.git | d4e07bab5729c7d7cc3d2b95568cd9a661a53c4f | linux64, linuxarm64 |
+| 45-x11/40-libx11 | https://gitlab.freedesktop.org/xorg/lib/libx11.git | 13f9b8de400335f4b86bb0672da02f8166c0e796 | linux64, linuxarm64 |
+| 45-x11/50-libxext | https://gitlab.freedesktop.org/xorg/lib/libxext.git | 508f8adca2540ff8926ac8456cb1c553a8caae76 | linux64, linuxarm64 |
+| 45-x11/50-libxfixes | https://gitlab.freedesktop.org/xorg/lib/libxfixes.git | 55bb2d1d57d43e0595ce45393f26eb433d75a7cc | linux64, linuxarm64 |
+| 45-x11/50-libxi | https://gitlab.freedesktop.org/xorg/lib/libxi.git | 3a0adabd16d8bf19c772061ad67f25c51281edf3 | linux64, linuxarm64 |
+| 45-x11/50-libxinerama | https://gitlab.freedesktop.org/xorg/lib/libxinerama.git | d7162b962710bc724b41cabab4e7cea303c4b541 | linux64, linuxarm64 |
+| 45-x11/50-libxrender | https://gitlab.freedesktop.org/xorg/lib/libxrender.git | f32afe9f877ae032c6bc9c27b17b7978b1b4c856 | linux64, linuxarm64 |
+| 45-x11/50-libxscrnsaver | https://gitlab.freedesktop.org/xorg/lib/libxscrnsaver.git | 3f753e7a4050db083474444ae91cc17a849eaa4d | linux64, linuxarm64 |
+| 45-x11/50-libxxf86vm | https://gitlab.freedesktop.org/xorg/lib/libxxf86vm.git | c76fde6bffcc87e5dd98d8196bb01a299bdc3236 | linux64, linuxarm64 |
+| 45-x11/60-libglvnd | https://gitlab.freedesktop.org/glvnd/libglvnd.git | c046a760d845416e98ac4128757b2b356c47fdaa | linux64, linuxarm64 |
+| 45-x11/60-libxcursor | https://gitlab.freedesktop.org/xorg/lib/libxcursor.git | 15efad7ccd035f5d1ddc8d437e047569d1775fa7 | linux64, linuxarm64 |
+| 45-x11/60-libxrandr | https://gitlab.freedesktop.org/xorg/lib/libxrandr.git | 8a4ba1974bcf07057cf891128d86ae1ab5303574 | linux64, linuxarm64 |
+| 45-x11/60-libxv | https://gitlab.freedesktop.org/xorg/lib/libxv.git | f315ec50fcad9bdbaed46c3e78dc5e7fe209f933 | linux64, linuxarm64 |
+| 50-vaapi/30-libpciaccess | https://gitlab.freedesktop.org/xorg/lib/libpciaccess.git | 38e6f15f839fba2c49982e7ad61cde681fd5d4d6 | linux64, linuxarm64 |
+| 50-vaapi/40-libdrm | https://gitlab.freedesktop.org/mesa/drm.git | b97cbde15c5c3abfe44d78e8f57139e50f612fec | linux64, linuxarm64 |
+
+The Windows-only libraries (mingw-w64, mingw-std-threads) are not in the Linux builds. The Linux programs link glibc dynamically.
